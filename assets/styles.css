@@ -10,19 +10,48 @@
   object-position: center top;
 }
 
-.project-art.image-art {
+/* Research project images — remove illustration containers */
+.project-section .project-art.image-art {
+  display: block;
   height: auto;
   min-height: 0;
-  background: white;
-  border: 1px solid var(--line);
   padding: 0;
-  overflow: hidden;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: inherit;
 }
 
-.project-art.image-art img {
+/* Display the images at a larger size */
+.project-section .project-art.image-art img {
   display: block;
-  width: 100%;
+  width: 115%;
+  max-width: none;
   height: auto;
+  margin-left: -7.5%;
+  padding: 0;
+  border: none;
+  border-radius: 0;
   object-fit: initial;
-  object-position: center;
+  box-shadow: none;
+}
+
+/* Give the image slightly more space than the text */
+.project-section {
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 65px;
+}
+
+/* Preserve the layout on smaller screens */
+@media (max-width: 900px) {
+  .project-section {
+    grid-template-columns: 1fr;
+  }
+
+  .project-section .project-art.image-art img {
+    width: 100%;
+    margin-left: 0;
+  }
 }
