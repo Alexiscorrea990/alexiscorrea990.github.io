@@ -9,3 +9,16 @@
   object-fit: cover;
   object-position: center top;
 }
+.project-art.image-art {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 18px;
+}
+
+.project-art.image-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
