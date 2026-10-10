@@ -9,6 +9,7 @@
   object-fit: cover;
   object-position: center top;
 }
+
 .project-art.image-art {
   background: white;
   border: 1px solid var(--line);
